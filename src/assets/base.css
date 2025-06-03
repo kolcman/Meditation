@@ -1,8 +1,8 @@
 :root {
   --font: 'Alegreya Sans', sans-serif;
   --color-fg: #ffffff;
-  --color-fg-opacity05: background: rgba(255, 255, 255, 0.5);
-  --color-fg-opacity09: background: rgba(255, 255, 255, 0.9);
+  --color-fg-opacity05: rgba(255, 255, 255, 0.5);
+  --color-fg-opacity09: rgba(255, 255, 255, 0.9);
   --color-bg: #253334;
   --color-btn: #7c9a92;
   --icon-bg: #69b09c;
