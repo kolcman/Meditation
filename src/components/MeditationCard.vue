@@ -1,16 +1,15 @@
 <template>
   <div class="card">
     <div class="card__top">
-      <h2 class="card__title">Title</h2>
-      <p class="card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, dolores? Lorem ipsum
-        dolor sit amet consectetur adipisicing elit. Dolore, nulla.</p>
+      <h2 class="card__title">{{ title }}</h2>
+      <p class="card__description">{{ description }}</p>
     </div>
     <div class="card__bottom">
       <ButtonBase class="card__btn">
         Начать
         <IconPlay />
       </ButtonBase>
-      <span class="card__time">10 min</span>
+      <span class="card__duration">{{ duration }} min</span>
     </div>
   </div>
 </template>
@@ -18,6 +17,14 @@
 <script setup lang="ts">
 import ButtonBase from '@/components/icon/ButtonBase.vue';
 import IconPlay from '@/components/icon/IconPlay.vue';
+
+const { title, description, duration } = defineProps({
+  title: String,
+  description: String,
+  duration: Number
+})
+
+
 
 </script>
 
@@ -68,7 +75,7 @@ import IconPlay from '@/components/icon/IconPlay.vue';
   background: var(--color-bg-hover);
 }
 
-.card__time {
+.card__duration {
   font-size: 15px;
   color: var(--color-bg);
 }

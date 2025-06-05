@@ -1,15 +1,15 @@
-<script setup lang="ts">
-
-
-import MeditationCard from '@/components/MeditationCard.vue';
-</script>
-
 <template>
   <main>
-    <ul class="meditation-list">
-      <li><MeditationCard/></li>
-    </ul>
+    <div class="meditation-list">
+      <MeditationList />
+    </div>
   </main>
 </template>
+
+
+<script setup lang="ts">
+import MeditationList from './components/MeditationList.vue';
+</script>
+
 
 <style scoped></style>
