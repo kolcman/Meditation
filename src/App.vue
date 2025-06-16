@@ -6,16 +6,10 @@ import IconLogo from './components/icon/IconLogo.vue';
 
 <template>
   <main>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     <div class="login">
-      Simple text
       <IconLogo />
     </div>
-=======
     <RouterView />
->>>>>>> Stashed changes
   </main>
 </template>
 
@@ -24,17 +18,3 @@ import IconLogo from './components/icon/IconLogo.vue';
   background-image: url("/public/bg.jpg");
 }
 </style>
-=======
-=======
->>>>>>> Stashed changes
-    <RouterView />
-  </main>
-</template>
-
-
-<script setup lang="ts">
-</script>
-
-
-<style scoped></style>
->>>>>>> Stashed changes
