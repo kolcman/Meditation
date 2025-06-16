@@ -7,10 +7,14 @@ import IconLogo from './components/icon/IconLogo.vue';
 <template>
   <main>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <div class="login">
       Simple text
       <IconLogo />
     </div>
+=======
+    <RouterView />
+>>>>>>> Stashed changes
   </main>
 </template>
 
