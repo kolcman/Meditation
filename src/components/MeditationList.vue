@@ -29,6 +29,7 @@ onMounted(() => {
   padding: 0;
   list-style: none;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 24px 22px;
 }

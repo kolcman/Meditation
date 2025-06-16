@@ -4,6 +4,8 @@
   --color-fg-opacity05: rgba(255, 255, 255, 0.5);
   --color-fg-opacity09: rgba(255, 255, 255, 0.9);
   --color-bg: #253334;
+
+  --color-border: #3a5051;
   --color-text: #000000;
   --color-card-bg: #f7f3f0;
   --color-bg-hover: #3c5153;
@@ -21,10 +23,14 @@
 
 body {
   min-height: 100vh;
+  max-width: 1280px;
   color: var(--color-fg);
   background: var(--color-bg);
+  transition:
+    color 0.5s,
+    background-color 0.5s;
   line-height: 1.6;
-  font-family: var(--font), sans-serif;
+  font-family: var(--font);
   font-size: 15px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
