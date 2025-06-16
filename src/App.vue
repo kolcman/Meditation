@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import IconLogo from './components/icon/IconLogo.vue';
 </script>
 
 <template>
@@ -8,8 +7,4 @@ import IconLogo from './components/icon/IconLogo.vue';
   </main>
 </template>
 
-<style scoped>
-.login {
-  background-image: url("/public/bg.jpg");
-}
-</style>
+<style scoped></style>

@@ -17,7 +17,7 @@
       </li>
 
       <li class="nav__item">
-        <RouterLink class="nav__link" active-class="nav__link--active" to="/test">
+        <RouterLink class="nav__link" active-class="nav__link--active" to="/">
           <IconExit class="nav__icon" />
           <span class="nav__text">Выход</span>
         </RouterLink>
