@@ -8,6 +8,7 @@ import IconLogo from './components/icon/IconLogo.vue';
   <main>
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <div class="login">
       Simple text
       <IconLogo />
@@ -24,6 +25,8 @@ import IconLogo from './components/icon/IconLogo.vue';
 }
 </style>
 =======
+=======
+>>>>>>> Stashed changes
     <RouterView />
   </main>
 </template>
