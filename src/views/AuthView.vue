@@ -13,14 +13,18 @@
 import ButtonMain from '@/components/ButtonMain.vue';
 import IconLogo from '@/components/icon/IconLogo.vue'
 import InputString from '@/components/InputString.vue';
-import { router } from '@/routes';
+import { useAuthStore } from '@/stores/auth.store';
 import { ref } from 'vue';
 
 const form = ref<{ username: string, password: string }>({ username: '', password: '' });
+const authStore = useAuthStore();
 
 function login(event: Event) {
   event.preventDefault();
-  router.push({ name: 'main' })
+  if (!form.value.username || !form.value.password) {
+    return
+  }
+  authStore.login(form.value.username, form.value.password)
 }
 
 </script>
