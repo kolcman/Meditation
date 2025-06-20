@@ -4,10 +4,6 @@
   </button>
 </template>
 
-<script setup lang="ts">
-
-</script>
-
 <style scoped>
 .btn {
   display: flex;

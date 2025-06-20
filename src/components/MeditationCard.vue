@@ -30,7 +30,7 @@ const { title, description, duration } = defineProps({
 
 <style scoped>
 .card {
-  width: 340px;
+  width: 300px;
   height: auto;
   min-height: 170px;
   padding: 22px 30px;

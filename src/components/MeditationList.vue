@@ -18,9 +18,6 @@ onMounted(() => {
   store.fetchMeditations();
 })
 
-
-
-
 </script>
 
 <style scoped>
@@ -29,7 +26,7 @@ onMounted(() => {
   padding: 0;
   list-style: none;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   flex-wrap: wrap;
   gap: 24px 22px;
 }

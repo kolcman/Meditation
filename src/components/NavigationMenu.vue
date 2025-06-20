@@ -40,7 +40,7 @@ import IconPlayMini from './icon/IconPlayMini.vue';
   justify-content: space-between;
   align-items: center;
   margin-bottom: 50px;
-  padding-top: 50px;
+  padding: 50px;
 }
 
 .nav__logo {
