@@ -2,9 +2,9 @@
   <div class="auth">
     <IconLogo class="auth__logo" />
     <form class="auth__form">
-      <InputString v-model="form.username" type="email" placeholder="Имя пользователя" />
-      <InputString v-model="form.password" type="email" placeholder="Пароль" />
-      <ButtonMain class="auth__btn" @click="">Войти в приложение</ButtonMain>
+      <InputString v-model="form.username" type="text" placeholder="Имя пользователя" />
+      <InputString v-model="form.password" type="password" placeholder="Пароль" />
+      <ButtonMain class="auth__btn" @click="login">Войти в приложение</ButtonMain>
     </form>
   </div>
 </template>
@@ -13,13 +13,14 @@
 import ButtonMain from '@/components/ButtonMain.vue';
 import IconLogo from '@/components/icon/IconLogo.vue'
 import InputString from '@/components/InputString.vue';
+import { router } from '@/routes';
 import { ref } from 'vue';
 
 const form = ref<{ username: string, password: string }>({ username: '', password: '' });
 
 function login(event: Event) {
   event.preventDefault();
-
+  router.push({ name: 'main' })
 }
 
 </script>

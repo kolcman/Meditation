@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from './constatns';
+import { useAuthStore } from './stores/auth.store';
 
 export const API_ROUTES = {
   meditations: 'meditations',
@@ -10,7 +10,13 @@ export const API_ROUTES = {
   },
 };
 
-export const http = axios.create({
-  baseURL: BASE_URL,
-  timeout: 10000,
-});
+export const client = () => {
+  const authStore = useAuthStore();
+  return axios.create({
+    baseURL: 'http://localhost:3000/api/',
+    timeout: 10000,
+    headers: {
+      Authorization: `Bearer ${authStore.getToken}`,
+    },
+  });
+};

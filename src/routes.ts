@@ -1,9 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { useAuthStore } from './stores/auth.store';
 
 export const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'start',
       component: () => import('@/views/StartView.vue'),
     },
     {
@@ -27,4 +29,20 @@ export const router = createRouter({
     },
   ],
   history: createWebHistory(),
+});
+
+router.beforeEach((to) => {
+  const authStore = useAuthStore();
+  if ((to.name = 'start')) {
+    return;
+  }
+  if (!authStore.getToken) {
+    if (to.name !== 'reg') {
+      return { name: 'reg' };
+    }
+  } else {
+    if (to.name === 'reg' || to.name === 'auth') {
+      return { name: 'main' };
+    }
+  }
 });

@@ -3,11 +3,10 @@
     <IconLogo class="registration__logo" />
     <form class="registration__form">
       <InputString v-model="form.email" type="email" placeholder="Электронная почта" />
-      <InputString v-model="form.username" type="email" placeholder="Имя пользователя" />
-      <InputString v-model="form.password" type="email" placeholder="Пароль" />
+      <InputString v-model="form.username" type="text" placeholder="Имя пользователя" />
+      <InputString v-model="form.password" type="password" placeholder="Пароль" />
       <ButtonMain class="registration__btn" @click="registrUser">Создать аккаунт</ButtonMain>
     </form>
-    <p v-if="registrStore.error" style="color: red">{{ "Пользователь с таким именем или email уже существует" }}</p>
   </div>
 </template>
 
