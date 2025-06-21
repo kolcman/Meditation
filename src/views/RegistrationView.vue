@@ -14,7 +14,6 @@
 import ButtonMain from '@/components/ButtonMain.vue';
 import IconLogo from '@/components/icon/IconLogo.vue'
 import InputString from '@/components/InputString.vue';
-import { useAuthStore } from '@/stores/auth.store';
 import { useRegistrStore } from '@/stores/registration.store';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';

@@ -3,8 +3,8 @@
     <IconLogo class="nav__logo" />
     <ul class="nav__list">
       <li class="nav__item">
-        <RouterLink class="nav__link" active-class="nav__link--active" to="">
-          <IconPlayMini class="nav__icon" @click="logout" />
+        <RouterLink class="nav__link" active-class="nav__link--active" to="/main">
+          <IconPlayMini class="nav__icon" />
           <span class="nav__text">Медитация</span>
         </RouterLink>
       </li>
@@ -17,7 +17,7 @@
       </li>
 
       <li class="nav__item">
-        <RouterLink class="nav__link" active-class="nav__link--active" to="/">
+        <RouterLink class="nav__link" active-class="nav__link--active" to="" @click="logout">
           <IconExit class="nav__icon" />
           <span class="nav__text">Выход</span>
         </RouterLink>
