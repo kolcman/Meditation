@@ -7,7 +7,7 @@ export const useStatsStore = defineStore('stats', () => {
   const statsStore = ref<Stats[]>();
 
   async function fetchStats() {
-    const response = await client().get<Stats>(API_ROUTES.stats);
+    const response = await client().get<{ data: { stats: Stats[] } }>(API_ROUTES.stats);
     statsStore.value = response.data.data.stats;
   }
 
