@@ -25,6 +25,7 @@ export const router = createRouter({
     },
     {
       path: '/stats',
+      name: 'stats',
       component: () => import('@/views/StatView.vue'),
     },
   ],
@@ -33,10 +34,24 @@ export const router = createRouter({
 
 router.beforeEach((to) => {
   const authStore = useAuthStore();
-  if (to.name === 'start') {
-    return;
+
+  // Список маршрутов, доступных без авторизации
+  const publicRoutes = ['start', 'reg', 'auth'];
+
+  // Если маршрут публичный — пропускаем
+  if (publicRoutes.includes(String(to.name))) {
+    return true;
   }
+
+  // Защищаем остальные маршруты
   if (!authStore.getToken) {
-    return { name: 'auth' };
+    return { name: 'auth' }; // Перенаправляем на вход
   }
+
+  // Если пользователь авторизован, но пытается зайти на публичную страницу
+  if (authStore.getToken && publicRoutes.includes(String(to.name))) {
+    return { name: 'main' };
+  }
+
+  return true;
 });
