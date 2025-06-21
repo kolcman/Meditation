@@ -1,7 +1,7 @@
 <template>
   <div class="user-info">
     <img class="user-avatar" src="../../public/avatar.png" alt="Автар">
-    <span class="user-welcome">Добро пожаловать, {{ userName }}!</span>
+    <span class="user-welcome">Добро пожаловать, {{ profileStore.profile?.username }}!</span>
     <span class="user-question">Как вы сегодня себя чувствуете?</span>
     <ul class="user-state">
       <li class="list-item">
@@ -39,7 +39,15 @@ import IconYinYang from './icon/IconYinYang.vue';
 import IconRelax from './icon/IconRelax.vue';
 import IconFocus from './icon/IconFocus.vue';
 import IconAnxios from './icon/IconAnxios.vue';
-const userName = "Наталья"
+import { useProfileStore } from '@/stores/profile.store';
+import { onMounted } from 'vue';
+
+const profileStore = useProfileStore()
+
+onMounted(() => {
+  profileStore.getUserProfile()
+})
+
 </script>
 
 <style scoped>

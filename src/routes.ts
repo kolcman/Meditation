@@ -33,16 +33,7 @@ export const router = createRouter({
 
 router.beforeEach((to) => {
   const authStore = useAuthStore();
-  if (to.name === 'start') {
-    return;
-  }
-  if (!authStore.getToken) {
-    if (to.name !== 'reg') {
-      return { name: 'reg' };
-    }
-  } else {
-    if (to.name === 'reg' || to.name === 'auth') {
-      return { name: 'main' };
-    }
+  if (!authStore.getToken && to.name !== 'auth') {
+    return { name: 'main' };
   }
 });

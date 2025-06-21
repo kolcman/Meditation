@@ -1,10 +1,10 @@
 <template>
   <div class="auth">
     <IconLogo class="auth__logo" />
-    <form class="auth__form">
+    <form class="auth__form" @submit="login">
       <InputString v-model="form.username" type="text" placeholder="Имя пользователя" />
       <InputString v-model="form.password" type="password" placeholder="Пароль" />
-      <ButtonMain class="auth__btn" @click="login">Войти в приложение</ButtonMain>
+      <ButtonMain class="auth__btn">Войти в приложение</ButtonMain>
     </form>
   </div>
 </template>
@@ -25,6 +25,7 @@ function login(event: Event) {
     return
   }
   authStore.login(form.value.username, form.value.password)
+  console.log("Login!");
 }
 
 </script>
