@@ -9,12 +9,12 @@ export const router = createRouter({
       component: () => import('@/views/StartView.vue'),
     },
     {
-      path: '/reg',
+      path: '/register',
       name: 'reg',
       component: () => import('@/views/RegistrationView.vue'),
     },
     {
-      path: '/auth',
+      path: '/login',
       name: 'auth',
       component: () => import('@/views/AuthView.vue'),
     },
@@ -31,9 +31,12 @@ export const router = createRouter({
   history: createWebHistory(),
 });
 
-// router.beforeEach((to) => {
-//   const authStore = useAuthStore();
-//   if (!authStore.getToken && to.name !== 'auth') {
-//     return { name: 'main' };
-//   }
-// });
+router.beforeEach((to) => {
+  const authStore = useAuthStore();
+  if (to.name === 'start') {
+    return;
+  }
+  if (!authStore.getToken) {
+    return { name: 'auth' };
+  }
+});

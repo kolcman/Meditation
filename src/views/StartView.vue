@@ -15,7 +15,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter()
 
 function redirectToMain() {
-  router.push('/auth')
+  router.push('/login')
 }
 
 </script>
