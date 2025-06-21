@@ -31,9 +31,9 @@ export const router = createRouter({
   history: createWebHistory(),
 });
 
-router.beforeEach((to) => {
-  const authStore = useAuthStore();
-  if (!authStore.getToken && to.name !== 'auth') {
-    return { name: 'main' };
-  }
-});
+// router.beforeEach((to) => {
+//   const authStore = useAuthStore();
+//   if (!authStore.getToken && to.name !== 'auth') {
+//     return { name: 'main' };
+//   }
+// });

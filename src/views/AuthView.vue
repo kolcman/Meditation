@@ -13,6 +13,7 @@
 import ButtonMain from '@/components/ButtonMain.vue';
 import IconLogo from '@/components/icon/IconLogo.vue'
 import InputString from '@/components/InputString.vue';
+import { router } from '@/routes';
 import { useAuthStore } from '@/stores/auth.store';
 import { ref } from 'vue';
 
@@ -25,7 +26,7 @@ function login(event: Event) {
     return
   }
   authStore.login(form.value.username, form.value.password)
-  console.log("Login!");
+  router.push('/main')
 }
 
 </script>

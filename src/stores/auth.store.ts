@@ -26,9 +26,9 @@ export const useAuthStore = defineStore('auth', () => {
 
   const getToken = computed(() => token.value);
 
-  async function login(email: string, password: string) {
+  async function login(userName: string, password: string) {
     const { data } = await client().post<LoginResponse>(API_ROUTES.auth.login, {
-      email,
+      userName,
       password,
     });
 
