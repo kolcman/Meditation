@@ -3,8 +3,8 @@
     <IconLogo class="nav__logo" />
     <ul class="nav__list">
       <li class="nav__item">
-        <RouterLink class="nav__link" active-class="nav__link--active" to="/main">
-          <IconPlayMini class="nav__icon" />
+        <RouterLink class="nav__link" active-class="nav__link--active" to="">
+          <IconPlayMini class="nav__icon" @click="logout" />
           <span class="nav__text">Медитация</span>
         </RouterLink>
       </li>
@@ -31,6 +31,15 @@ import IconLogo from '@/components/icon/IconLogo.vue';
 import IconStat from '@/components/icon/IconStat.vue';
 import IconExit from '@/components/icon/IconExit.vue'
 import IconPlayMini from './icon/IconPlayMini.vue';
+import { useAuthStore } from '@/stores/auth.store';
+import { router } from '@/routes';
+
+const authStore = useAuthStore()
+
+function logout() {
+  router.push({ name: 'auth' });
+  authStore.clearToken()
+}
 
 </script>
 

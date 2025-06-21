@@ -14,6 +14,7 @@
 import ButtonMain from '@/components/ButtonMain.vue';
 import IconLogo from '@/components/icon/IconLogo.vue'
 import InputString from '@/components/InputString.vue';
+import { useAuthStore } from '@/stores/auth.store';
 import { useRegistrStore } from '@/stores/registration.store';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -21,12 +22,14 @@ import { useRouter } from 'vue-router';
 
 const form = ref<{ username: string, email: string, password: string }>({ username: '', email: '', password: '' });
 const registrStore = useRegistrStore();
+const authStore = useAuthStore()
 const router = useRouter();
 
 
 function registrUser(event: Event) {
   event.preventDefault()
   registrStore.registrUser(form.value.username, form.value.email, form.value.password)
+  authStore.login(form.value.username, form.value.password)
   router.push({ name: 'main' });
 }
 

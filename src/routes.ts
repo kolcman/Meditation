@@ -35,20 +35,16 @@ export const router = createRouter({
 router.beforeEach((to) => {
   const authStore = useAuthStore();
 
-  // Список маршрутов, доступных без авторизации
   const publicRoutes = ['start', 'reg', 'auth'];
 
-  // Если маршрут публичный — пропускаем
   if (publicRoutes.includes(String(to.name))) {
     return true;
   }
 
-  // Защищаем остальные маршруты
   if (!authStore.getToken) {
-    return { name: 'auth' }; // Перенаправляем на вход
+    return { name: 'auth' };
   }
 
-  // Если пользователь авторизован, но пытается зайти на публичную страницу
   if (authStore.getToken && publicRoutes.includes(String(to.name))) {
     return { name: 'main' };
   }
