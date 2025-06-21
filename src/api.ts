@@ -8,6 +8,7 @@ export const API_ROUTES = {
     registration: 'auth/register',
     login: 'auth/login',
   },
+  stats: 'stats',
 };
 
 export const client = () => {

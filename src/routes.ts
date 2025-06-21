@@ -34,20 +34,21 @@ export const router = createRouter({
 
 router.beforeEach((to) => {
   const authStore = useAuthStore();
-
   const publicRoutes = ['start', 'reg', 'auth'];
 
-  if (publicRoutes.includes(String(to.name))) {
-    return true;
-  }
+  const isPublic = publicRoutes.includes(String(to.name));
+  const isAuthenticated = Boolean(authStore.getToken);
 
-  if (!authStore.getToken) {
-    return { name: 'auth' };
-  }
-
-  if (authStore.getToken && publicRoutes.includes(String(to.name))) {
+  // Авторизованный пользователь не должен попадать на страницы входа/регистрации
+  if (isAuthenticated && isPublic) {
     return { name: 'main' };
   }
 
+  // Неавторизованный пользователь пытается открыть приватную страницу
+  if (!isAuthenticated && !isPublic) {
+    return { name: 'auth' };
+  }
+
+  // Все проверки пройдены — разрешаем переход
   return true;
 });

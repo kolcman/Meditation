@@ -1,5 +1,11 @@
 export interface Profile {
-  username: string;
-  email: string;
-  password: string;
+  data: {
+    user: {
+      email: string;
+      id: number;
+      last_login_at: Date;
+      username: string;
+    };
+  };
+  status: string;
 }

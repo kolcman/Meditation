@@ -32,7 +32,7 @@ export const useAuthStore = defineStore('auth', () => {
       password,
     });
 
-    setToken(data.token);
+    setToken(data.data.token);
   }
 
   return { token, setToken, clearToken, getToken, login };

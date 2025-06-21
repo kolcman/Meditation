@@ -37,8 +37,8 @@ import { router } from '@/routes';
 const authStore = useAuthStore()
 
 function logout() {
-  router.push({ name: 'auth' });
   authStore.clearToken()
+  router.push({ name: 'auth' });
 }
 
 </script>

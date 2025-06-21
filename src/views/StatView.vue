@@ -1,11 +1,13 @@
 <template>
   <NavigationMenu />
-  {{ "Статистика" }}
+  {{ statsStore }}
 </template>
 
 <script setup lang="ts">
 import NavigationMenu from '@/components/NavigationMenu.vue';
-
+import { useStatsStore } from '@/stores/stats.store';
+const statsStore = useStatsStore()
+console.log(statsStore.fetchStats());
 </script>
 
 <style scoped>
