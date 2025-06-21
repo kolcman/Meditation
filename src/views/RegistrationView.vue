@@ -22,15 +22,13 @@ import { useRouter } from 'vue-router';
 
 const form = ref<{ username: string, email: string, password: string }>({ username: '', email: '', password: '' });
 const registrStore = useRegistrStore();
-const authStore = useAuthStore()
 const router = useRouter();
 
 
 function registrUser(event: Event) {
   event.preventDefault()
   registrStore.registrUser(form.value.username, form.value.email, form.value.password)
-  authStore.login(form.value.username, form.value.password)
-  router.push({ name: 'main' });
+  router.push({ name: 'auth' });
 }
 
 </script>

@@ -5,6 +5,7 @@
       <InputString v-model="form.username" type="text" placeholder="Имя пользователя" />
       <InputString v-model="form.password" type="password" placeholder="Пароль" />
       <ButtonMain class="auth__btn">Войти в приложение</ButtonMain>
+      <p v-if="authError" class="auth__error">{{ authErrorText }}</p>
     </form>
   </div>
 </template>
@@ -15,18 +16,38 @@ import IconLogo from '@/components/icon/IconLogo.vue'
 import InputString from '@/components/InputString.vue';
 import { router } from '@/routes';
 import { useAuthStore } from '@/stores/auth.store';
+import type { AxiosError } from 'axios';
 import { ref } from 'vue';
 
-const form = ref<{ username: string, password: string }>({ username: '', password: '' });
 const authStore = useAuthStore();
+const form = ref({
+  username: '',
+  password: ''
+});
 
-function login(event: Event) {
+const authError = ref(false);
+const authErrorText = ref('');
+
+async function login(event: Event) {
   event.preventDefault();
   if (!form.value.username || !form.value.password) {
+    authError.value = true;
     return
   }
-  authStore.login(form.value.username, form.value.password)
-  router.push('/main')
+  try {
+    await authStore.login(form.value.username, form.value.password);
+    authError.value = false;
+    router.push('/main');
+  } catch (error: unknown) {
+    const axiosError = error as AxiosError<{ message?: string }>
+    if (axiosError.response?.data?.message) {
+      authErrorText.value = axiosError.response?.data?.message;
+    } else {
+      authErrorText.value = "Ошибка входа. Попробуйте снова"
+    }
+    authError.value = true;
+  }
+
 }
 
 </script>
@@ -56,5 +77,11 @@ function login(event: Event) {
   flex-direction: column;
   gap: 30px;
   align-items: center;
+}
+
+.auth__error {
+  color: red;
+  font-size: 24px;
+  font-family: var(--font);
 }
 </style>
