@@ -32,6 +32,7 @@ async function login(event: Event) {
   event.preventDefault();
   if (!form.value.username || !form.value.password) {
     authError.value = true;
+    authErrorText.value = "Заполните все поля."
     return
   }
   try {

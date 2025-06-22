@@ -7,7 +7,6 @@
 import NavigationMenu from '@/components/NavigationMenu.vue';
 import { useStatsStore } from '@/stores/stats.store';
 const statsStore = useStatsStore()
-console.log(statsStore.fetchStats());
 </script>
 
 <style scoped>

@@ -30,6 +30,7 @@ const regErrorText = ref<string>();
 async function registrUser(event: Event) {
   if (!form.value.username || !form.value.email || !form.value.password) {
     regError.value = true
+    regErrorText.value = "Заполните все поля."
     return
   }
   try {
