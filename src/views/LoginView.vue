@@ -15,11 +15,11 @@ import ButtonMain from '@/components/ButtonMain.vue';
 import IconLogo from '@/components/icon/IconLogo.vue'
 import InputString from '@/components/InputString.vue';
 import { router } from '@/routes';
-import { useAuthStore } from '@/stores/auth.store';
+import { useLoginStore } from '@/stores/login.store';
 import type { AxiosError } from 'axios';
 import { ref } from 'vue';
 
-const authStore = useAuthStore();
+const loginStore = useLoginStore();
 const form = ref({
   username: '',
   password: ''
@@ -36,9 +36,9 @@ async function login(event: Event) {
     return
   }
   try {
-    await authStore.login(form.value.username, form.value.password);
+    await loginStore.login(form.value.username, form.value.password);
     authError.value = false;
-    router.push('/main');
+    router.push('/meditations');
   } catch (error: unknown) {
     const axiosError = error as AxiosError<{ message?: string }>
     if (axiosError.response?.data?.message) {

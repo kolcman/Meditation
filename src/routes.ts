@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { useAuthStore } from './stores/auth.store';
+import { useLoginStore } from './stores/login.store';
 
 export const router = createRouter({
   routes: [
@@ -16,12 +16,12 @@ export const router = createRouter({
     {
       path: '/login',
       name: 'auth',
-      component: () => import('@/views/AuthView.vue'),
+      component: () => import('@/views/LoginView.vue'),
     },
     {
-      path: '/main',
-      name: 'main',
-      component: () => import('@/views/MainView.vue'),
+      path: '/meditations',
+      name: 'meditations',
+      component: () => import('@/views/MeditationsView.vue'),
     },
     {
       path: '/stats',
@@ -33,22 +33,16 @@ export const router = createRouter({
 });
 
 router.beforeEach((to) => {
-  const authStore = useAuthStore();
+  const loginStore = useLoginStore();
   const publicRoutes = ['start', 'reg', 'auth'];
-
   const isPublic = publicRoutes.includes(String(to.name));
-  const isAuthenticated = Boolean(authStore.getToken);
+  const isAuthenticated = Boolean(loginStore.getToken);
 
-  // Авторизованный пользователь не должен попадать на страницы входа/регистрации
   if (isAuthenticated && isPublic) {
-    return { name: 'main' };
+    return { name: 'meditation' };
   }
-
-  // Неавторизованный пользователь пытается открыть приватную страницу
   if (!isAuthenticated && !isPublic) {
     return { name: 'auth' };
   }
-
-  // Все проверки пройдены — разрешаем переход
   return true;
 });

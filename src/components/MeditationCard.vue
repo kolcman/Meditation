@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import ButtonBase from '@/components/icon/ButtonBase.vue';
+import ButtonBase from '@/components/ButtonBase.vue';
 import IconPlay from '@/components/icon/IconPlay.vue';
 
 const { title, description, duration } = defineProps({
