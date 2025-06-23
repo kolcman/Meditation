@@ -5,11 +5,12 @@ import { ref } from 'vue';
 
 export const useMeditationsStore = defineStore('meditations', () => {
   const meditations = ref<Meditation[]>([]);
+  const isStarted = ref<boolean>(false);
 
   async function fetchMeditations() {
     const resp = await client().get<MeditationResponse>(API_ROUTES.meditations);
     meditations.value = resp.data.data.meditations;
   }
 
-  return { meditations, fetchMeditations };
+  return { meditations, isStarted, fetchMeditations };
 });

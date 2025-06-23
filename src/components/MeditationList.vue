@@ -17,6 +17,8 @@ onMounted(() => {
   store.fetchMeditations();
 })
 
+
+
 </script>
 
 <style scoped>

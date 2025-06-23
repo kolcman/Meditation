@@ -5,7 +5,7 @@
       <p class="card__description">{{ description }}</p>
     </div>
     <div class="card__bottom">
-      <ButtonBase class="card__btn">
+      <ButtonBase class="card__btn" @click="startMeditation">
         Начать
         <IconPlay />
       </ButtonBase>
@@ -17,13 +17,19 @@
 <script setup lang="ts">
 import ButtonBase from '@/components/ButtonBase.vue';
 import IconPlay from '@/components/icon/IconPlay.vue';
+import { useMeditationsStore } from '@/stores/meditation.store';
+
+const meditationStore = useMeditationsStore();
+
+function startMeditation() {
+  meditationStore.isStarted = true;
+}
 
 const { title, description, duration } = defineProps({
   title: String,
   description: String,
   duration: Number
 })
-
 
 
 </script>

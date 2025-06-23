@@ -39,7 +39,7 @@ router.beforeEach((to) => {
   const isAuthenticated = Boolean(loginStore.getToken);
 
   if (isAuthenticated && isPublic) {
-    return { name: 'meditation' };
+    return { name: 'meditations' };
   }
   if (!isAuthenticated && !isPublic) {
     return { name: 'auth' };

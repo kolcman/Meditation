@@ -48,7 +48,6 @@ function logout() {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 50px;
   padding: 50px;
 }
 

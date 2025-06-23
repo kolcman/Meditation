@@ -1,21 +1,44 @@
 <template>
   <div class="meditatiion">
-    <div class="meditation__timer">5:00</div>
+    <div class="meditation__timer">{{ formatTime(counterStore.counterTime) }}</div>
     <h2 class="meditation__title">TEST</h2>
     <p class="meditation__description">TEST</p>
     <div class="meditation__controls">
       <IconBackspace />
-      <IconPlayBig />
+      <ButtonRounded v-if="counterStore.isStarted && counterStore.counterState == 'pause'"
+        @click="counterStore.startCounter">
+        <IconPlayBig />
+      </ButtonRounded>
+      <ButtonRounded v-if="counterStore.isStarted && counterStore.counterState == 'play'"
+        @click="counterStore.startCounter">
+        <IconPause />
+      </ButtonRounded>
+      <ButtonRounded v-if="!counterStore.isStarted && counterStore.counterState == 'stop'">
+        <IconCheck />
+      </ButtonRounded>
       <IconRepeat />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import IconBackspace from '@/components/icon/iconBackspace.vue';
-import IconPlayBig from '@/components/icon/IconPlayBig.vue';
-import IconRepeat from '@/components/icon/IconRepeat.vue';
 
+import IconBackspace from '@/components/icon/IconBackspace.vue'
+import IconPause from '@/components/icon/IconPause.vue';
+import IconRepeat from '@/components/icon/IconRepeat.vue';
+import IconPlayBig from '@/components/icon/IconPlayBig.vue'
+import ButtonRounded from '@/components/ButtonRounded.vue';
+import IconCheck from './icon/IconCheck.vue';
+import { useCounterStore } from '@/stores/counter.store';
+
+const counterStore = useCounterStore()
+counterStore.counterTime = 500
+
+function formatTime(seconds: number): string {
+  const minutes = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+}
 
 
 </script>
