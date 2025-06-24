@@ -1,7 +1,7 @@
 <template>
   <NavigationMenu />
   <div class="meditation">
-    <div class="meditation__timer">{{ formatTime(counterStore.counterTime) }}</div>
+    <div class="meditation__timer">{{ formattedTime }}</div>
     <h2 class="meditation__title">{{ currentCard?.title }}</h2>
     <p class="meditation__description">{{ currentCard?.description }}</p>
     <div class="meditation__controls">
@@ -41,15 +41,14 @@ const duration = computed(() => currentCard?.duration_min ?? 0)
 onMounted(() => {
   if (duration.value) {
     counterStore.setMinutes(duration.value)
-    counterStore.startCounter()
   }
 })
 
-function formatTime(seconds: number): string {
-  const minutes = Math.floor(seconds / 60)
-  const secs = seconds % 60
+const formattedTime = computed(() => {
+  const minutes = Math.floor(counterStore.counterTime / 60)
+  const secs = counterStore.counterTime % 60
   return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`
-}
+})
 
 function saveStats() {
   const minutes = counterStore.getElapsedFullMinutes();
