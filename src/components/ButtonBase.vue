@@ -16,5 +16,12 @@
   font-size: 15px;
   line-height: 18px;
   cursor: pointer;
+  scale: 1;
+  transition: var(--animation);
+}
+
+.button:hover {
+  background-color: var(--color-btn-mood-hover);
+  scale: 1.1;
 }
 </style>

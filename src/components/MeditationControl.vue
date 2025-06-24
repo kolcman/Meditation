@@ -1,10 +1,10 @@
 <template>
   <div class="meditatiion">
     <div class="meditation__timer">{{ formatTime(counterStore.counterTime) }}</div>
-    <h2 class="meditation__title">TEST</h2>
-    <p class="meditation__description">TEST</p>
+    <h2 class="meditation__title">{{ currentCard?.title }}</h2>
+    <p class="meditation__description">{{ currentCard?.description }}</p>
     <div class="meditation__controls">
-      <IconBackspace />
+      <IconBackspace class="controls-btn" @click="stopCounter" />
       <ButtonRounded v-if="counterStore.isStarted && counterStore.counterState == 'pause'"
         @click="counterStore.startCounter">
         <IconPlayBig />
@@ -13,10 +13,10 @@
         @click="counterStore.startCounter">
         <IconPause />
       </ButtonRounded>
-      <ButtonRounded v-if="!counterStore.isStarted && counterStore.counterState == 'stop'">
+      <ButtonRounded v-if="!counterStore.isStarted && counterStore.counterState == 'stop'" @click="saveStats">
         <IconCheck />
       </ButtonRounded>
-      <IconRepeat />
+      <IconRepeat class="controls-btn" @click="repeatCounter" />
     </div>
   </div>
 </template>
@@ -30,16 +30,50 @@ import IconPlayBig from '@/components/icon/IconPlayBig.vue'
 import ButtonRounded from '@/components/ButtonRounded.vue';
 import IconCheck from './icon/IconCheck.vue';
 import { useCounterStore } from '@/stores/counter.store';
+import { useMeditationsStore } from '@/stores/meditation.store';
+import { onMounted } from 'vue';
+import { useStatsStore } from '@/stores/stats.store';
+import { router } from '@/routes';
 
+const meditationStore = useMeditationsStore()
 const counterStore = useCounterStore()
-counterStore.counterTime = 500
+const currentCard = meditationStore.currentMeditation
+const statsStore = useStatsStore();
+
+onMounted(() => {
+  if (currentCard?.duration_min) {
+    counterStore.setMinutes(currentCard.duration_min)
+    counterStore.startCounter()
+  }
+})
 
 function formatTime(seconds: number): string {
-  const minutes = Math.floor(seconds / 60);
-  const secs = seconds % 60;
-  return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  const minutes = Math.floor(seconds / 60)
+  const secs = seconds % 60
+  return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`
 }
 
+function saveStats() {
+  if (currentCard?.duration_min) {
+    statsStore.saveDuration({ type: 'duration_min', value: currentCard.duration_min })
+    meditationStore.isStarted = false
+    router.push({ name: 'meditations' })
+  }
+}
+
+function stopCounter() {
+  counterStore.setMinutes(0)
+  counterStore.stopCounter()
+  meditationStore.isStarted = false
+  router.push({ name: 'meditations' });
+}
+
+function repeatCounter() {
+  if (currentCard?.duration_min) {
+    counterStore.setMinutes(currentCard.duration_min)
+    counterStore.startCounter()
+  }
+}
 
 </script>
 
@@ -92,5 +126,14 @@ function formatTime(seconds: number): string {
   justify-content: center;
   align-items: center;
   gap: 33px;
+}
+
+.controls-btn {
+  scale: 1;
+  transition: var(--animation);
+}
+
+.controls-btn:hover {
+  scale: 1.2;
 }
 </style>

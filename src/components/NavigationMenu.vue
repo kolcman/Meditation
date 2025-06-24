@@ -79,6 +79,7 @@ function logout() {
   height: 100%;
   color: var(--color-fg-opacity05);
   text-decoration: none;
+  transition: var(--animation);
 }
 
 .nav__link.nav__link--active,

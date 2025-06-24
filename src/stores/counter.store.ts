@@ -12,16 +12,12 @@ export const useCounterStore = defineStore('counter', () => {
 
     if (counterState.value === 'play') {
       counterState.value = 'pause';
-      if (interval) {
-        clearInterval(interval);
-        interval = null;
-      }
+      if (interval) clearInterval(interval);
+      interval = null;
     } else {
       counterState.value = 'play';
 
-      if (interval) {
-        clearInterval(interval);
-      }
+      if (interval) clearInterval(interval);
 
       interval = setInterval(() => {
         if (counterState.value === 'play' && counterTime.value > 0) {
@@ -36,6 +32,11 @@ export const useCounterStore = defineStore('counter', () => {
   function stopCounter() {
     isStarted.value = false;
     counterState.value = 'stop';
+    if (interval) clearInterval(interval);
+  }
+
+  function setMinutes(minutes: number) {
+    counterTime.value = Math.floor(minutes * 60);
   }
 
   return {
@@ -44,5 +45,6 @@ export const useCounterStore = defineStore('counter', () => {
     isStarted,
     startCounter,
     stopCounter,
+    setMinutes,
   };
 });

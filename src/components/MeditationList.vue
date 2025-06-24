@@ -1,7 +1,8 @@
 <template>
   <ul class="meditation-list">
-    <li v-for="item in store.meditations" :key="item.ID">
-      <MeditationCard :title="item.title" :description="item.description" :duration="item.duration_min" />
+    <li v-for="item in meditationStore.meditations" :key="item.ID">
+      <MeditationCard :id="item.ID" :title="item.title" :description="item.description"
+        :duration_min="item.duration_min" @start="meditation => emit('start', meditation)" />
     </li>
   </ul>
 </template>
@@ -11,12 +12,15 @@ import MeditationCard from './MeditationCard.vue';
 import { useMeditationsStore } from '@/stores/meditation.store';
 import { onMounted } from 'vue';
 
-const store = useMeditationsStore()
+const meditationStore = useMeditationsStore()
+
+const emit = defineEmits<{
+  (e: 'start', meditation: { ID: number; title: string; description: string; duration_min: number }): void;
+}>()
 
 onMounted(() => {
-  store.fetchMeditations();
+  meditationStore.fetchMeditations();
 })
-
 
 
 </script>

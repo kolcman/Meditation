@@ -19,5 +19,12 @@
   border: none;
   border-radius: 50%;
   cursor: pointer;
+  scale: 1;
+  transition: var(--animation);
+}
+
+.btn-rounded:hover {
+  background-color: var(--color-btn-mood-hover);
+  scale: 1.1;
 }
 </style>

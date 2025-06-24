@@ -3,7 +3,7 @@
   <div class="container">
     <div v-if="!meditationStore.isStarted" class="controls">
       <UserInfo />
-      <MeditationList />
+      <MeditationList @start="handleStartMeditation" />
     </div>
     <MeditationControl v-else class="meditation__control" />
   </div>
@@ -19,7 +19,14 @@ import { useMeditationsStore } from '@/stores/meditation.store';
 
 const meditationStore = useMeditationsStore();
 
-// Сделал клик по кнопке с помощью стор.
+function handleStartMeditation(meditation: {
+  ID: number;
+  title: string;
+  description: string;
+  duration_min: number;
+}) {
+  meditationStore.startMeditation(meditation);
+}
 
 </script>
 
