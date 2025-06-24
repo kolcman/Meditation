@@ -17,6 +17,7 @@
 <script setup lang="ts">
 import ButtonBase from '@/components/ButtonBase.vue';
 import IconPlay from '@/components/icon/IconPlay.vue';
+import { router } from '@/routes';
 import { useMeditationsStore } from '@/stores/meditation.store';
 
 const { id, title, description, duration_min } = defineProps<{
@@ -36,6 +37,7 @@ function startMeditation() {
     duration_min: duration_min
   });
   meditationStore.isStarted = true
+  router.push({ name: 'timer' });
 }
 </script>
 

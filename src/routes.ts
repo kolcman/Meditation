@@ -24,6 +24,11 @@ export const router = createRouter({
       component: () => import('@/views/MeditationsView.vue'),
     },
     {
+      path: '/timer',
+      name: 'timer',
+      component: () => import('@/views/MeditationTimerView.vue'),
+    },
+    {
       path: '/stats',
       name: 'stats',
       component: () => import('@/views/StatView.vue'),

@@ -1,5 +1,6 @@
 <template>
-  <div class="meditatiion">
+  <NavigationMenu />
+  <div class="meditation">
     <div class="meditation__timer">{{ formatTime(counterStore.counterTime) }}</div>
     <h2 class="meditation__title">{{ currentCard?.title }}</h2>
     <p class="meditation__description">{{ currentCard?.description }}</p>
@@ -28,12 +29,13 @@ import IconPause from '@/components/icon/IconPause.vue';
 import IconRepeat from '@/components/icon/IconRepeat.vue';
 import IconPlayBig from '@/components/icon/IconPlayBig.vue'
 import ButtonRounded from '@/components/ButtonRounded.vue';
-import IconCheck from './icon/IconCheck.vue';
+import IconCheck from '@/components/icon/IconCheck.vue';
 import { useCounterStore } from '@/stores/counter.store';
 import { useMeditationsStore } from '@/stores/meditation.store';
 import { onMounted } from 'vue';
 import { useStatsStore } from '@/stores/stats.store';
 import { router } from '@/routes';
+import NavigationMenu from '@/components/NavigationMenu.vue';
 
 const meditationStore = useMeditationsStore()
 const counterStore = useCounterStore()
@@ -65,6 +67,7 @@ function stopCounter() {
   counterStore.setMinutes(0)
   counterStore.stopCounter()
   meditationStore.isStarted = false
+  console.log('Click');
   router.push({ name: 'meditations' });
 }
 
@@ -78,7 +81,7 @@ function repeatCounter() {
 </script>
 
 <style scoped>
-.meditatiion {
+.meditation {
   display: flex;
   flex-direction: column;
   justify-content: center;
