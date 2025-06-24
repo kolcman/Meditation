@@ -6,15 +6,10 @@
     <p class="meditation__description">{{ currentCard?.description }}</p>
     <div class="meditation__controls">
       <IconBackspace class="controls-btn" @click="stopCounter" />
-      <ButtonRounded v-if="counterStore.isStarted && counterStore.counterState == 'pause'"
-        @click="counterStore.startCounter">
-        <IconPlayBig />
+      <ButtonRounded @click="counterStore.startCounter">
+        <component :is="counterStore.counterState === 'play' ? IconPause : IconPlayBig" />
       </ButtonRounded>
-      <ButtonRounded v-if="counterStore.isStarted && counterStore.counterState == 'play'"
-        @click="counterStore.startCounter">
-        <IconPause />
-      </ButtonRounded>
-      <ButtonRounded v-if="!counterStore.isStarted && counterStore.counterState == 'stop'" @click="saveStats">
+      <ButtonRounded v-if="!counterStore.isStarted && counterStore.counterState === 'stop'" @click="saveStats">
         <IconCheck />
       </ButtonRounded>
       <IconRepeat class="controls-btn" @click="repeatCounter" />
@@ -32,7 +27,7 @@ import ButtonRounded from '@/components/ButtonRounded.vue';
 import IconCheck from '@/components/icon/IconCheck.vue';
 import { useCounterStore } from '@/stores/counter.store';
 import { useMeditationsStore } from '@/stores/meditation.store';
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useStatsStore } from '@/stores/stats.store';
 import { router } from '@/routes';
 import NavigationMenu from '@/components/NavigationMenu.vue';
@@ -41,10 +36,11 @@ const meditationStore = useMeditationsStore()
 const counterStore = useCounterStore()
 const currentCard = meditationStore.currentMeditation
 const statsStore = useStatsStore();
+const duration = computed(() => currentCard?.duration_min ?? 0)
 
 onMounted(() => {
-  if (currentCard?.duration_min) {
-    counterStore.setMinutes(currentCard.duration_min)
+  if (duration.value) {
+    counterStore.setMinutes(duration.value)
     counterStore.startCounter()
   }
 })
@@ -56,24 +52,29 @@ function formatTime(seconds: number): string {
 }
 
 function saveStats() {
-  if (currentCard?.duration_min) {
-    statsStore.saveDuration({ type: 'duration_min', value: currentCard.duration_min })
+  const minutes = counterStore.getElapsedFullMinutes();
+  if (minutes > 0) {
+    statsStore.saveDuration({ type: 'duration_min', value: minutes })
     meditationStore.isStarted = false
     router.push({ name: 'meditations' })
   }
 }
 
 function stopCounter() {
-  counterStore.setMinutes(0)
-  counterStore.stopCounter()
-  meditationStore.isStarted = false
-  console.log('Click');
+  const minutes = counterStore.getElapsedFullMinutes();
+  if (minutes > 0) {
+    statsStore.saveDuration({ type: 'duration_min', value: minutes });
+  }
+  counterStore.setMinutes(0);
+  counterStore.stopCounter();
+  meditationStore.isStarted = false;
   router.push({ name: 'meditations' });
 }
 
+
 function repeatCounter() {
-  if (currentCard?.duration_min) {
-    counterStore.setMinutes(currentCard.duration_min)
+  if (duration.value > 0) {
+    counterStore.setMinutes(duration.value)
     counterStore.startCounter()
   }
 }

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { useLoginStore } from './stores/login.store';
+import { useCounterStore } from './stores/counter.store';
 
 export const router = createRouter({
   routes: [
@@ -42,12 +43,19 @@ router.beforeEach((to) => {
   const publicRoutes = ['start', 'reg', 'auth'];
   const isPublic = publicRoutes.includes(String(to.name));
   const isAuthenticated = Boolean(loginStore.getToken);
+  const counterStore = useCounterStore();
 
   if (isAuthenticated && isPublic) {
     return { name: 'meditations' };
   }
   if (!isAuthenticated && !isPublic) {
     return { name: 'auth' };
+  }
+
+  if (to.name === 'timer') {
+    if (!counterStore.isStarted) {
+      return { name: 'meditations' };
+    }
   }
   return true;
 });
