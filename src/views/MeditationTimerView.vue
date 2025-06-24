@@ -41,6 +41,7 @@ const duration = computed(() => currentCard?.duration_min ?? 0)
 onMounted(() => {
   if (duration.value) {
     counterStore.setMinutes(duration.value)
+    counterStore.startCounter()
   }
 })
 
