@@ -38,24 +38,25 @@ export const router = createRouter({
   history: createWebHistory(),
 });
 
-router.beforeEach((to) => {
+router.beforeEach((to, from, next) => {
   const loginStore = useLoginStore();
+  const counterStore = useCounterStore();
+
   const publicRoutes = ['start', 'reg', 'auth'];
   const isPublic = publicRoutes.includes(String(to.name));
   const isAuthenticated = Boolean(loginStore.getToken);
-  const counterStore = useCounterStore();
 
   if (isAuthenticated && isPublic) {
-    return { name: 'meditations' };
-  }
-  if (!isAuthenticated && !isPublic) {
-    return { name: 'auth' };
+    return next({ name: 'meditations' });
   }
 
-  if (to.name === 'timer') {
-    if (!counterStore.isStarted) {
-      return { name: 'meditations' };
-    }
+  if (!isAuthenticated && !isPublic) {
+    return next({ name: 'auth' });
   }
-  return true;
+
+  if (to.name === 'timer' && !counterStore.isStarted) {
+    return next({ name: 'meditations' });
+  }
+
+  return next();
 });

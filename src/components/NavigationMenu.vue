@@ -38,7 +38,7 @@ const loginStore = useLoginStore()
 
 function logout() {
   loginStore.clearToken()
-  router.push({ name: 'auth' });
+  router.push({ name: 'start' });
 }
 
 </script>

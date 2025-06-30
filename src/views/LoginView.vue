@@ -5,6 +5,7 @@
       <InputString v-model="form.username" type="text" placeholder="Имя пользователя" />
       <InputString v-model="form.password" type="password" placeholder="Пароль" />
       <ButtonMain class="auth__btn">Войти в приложение</ButtonMain>
+      <span>Нет аккаунта? <RouterLink class="auth__link" to="/register">Зарегистрироваться</RouterLink></span>
       <p v-if="authError" class="auth__error">{{ authErrorText }}</p>
     </form>
   </div>
@@ -84,5 +85,16 @@ async function login(event: Event) {
   color: red;
   font-size: 24px;
   font-family: var(--font);
+}
+
+.auth__link {
+  color: var(--color-fg);
+  margin-left: 5px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.auth__link:hover {
+  color: aquamarine;
 }
 </style>

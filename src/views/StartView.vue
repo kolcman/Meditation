@@ -3,7 +3,8 @@
     <IconLogo class="start__logo" />
     <h1 class="start__title">Добро пожаловать!</h1>
     <p class="start__description">Медитируй и оставайся в фокусе, чтобы быть счастливым.</p>
-    <ButtonMain @click="redirectToMain">Войти в приложение</ButtonMain>
+    <ButtonMain class="start__btn" @click="redirectToLogin">Войти</ButtonMain>
+    <RouterLink class="start__link" to="/register">Зарегистрироваться</RouterLink>
   </div>
 </template>
 
@@ -14,9 +15,10 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter()
 
-function redirectToMain() {
+function redirectToLogin() {
   router.push('/login')
 }
+
 
 </script>
 
@@ -49,5 +51,19 @@ function redirectToMain() {
   font-weight: 500;
   font-size: 20px;
   margin-bottom: 65px;
+}
+
+.start__btn {
+  margin-bottom: 5px;
+}
+
+.start__link {
+  color: var(--color-fg);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.start__link:hover {
+  color: aquamarine;
 }
 </style>
