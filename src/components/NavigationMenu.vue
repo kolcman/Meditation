@@ -3,7 +3,7 @@
     <IconLogo class="nav__logo" />
     <ul class="nav__list">
       <li class="nav__item">
-        <RouterLink class="nav__link" active-class="nav__link--active" to="/main">
+        <RouterLink class="nav__link" active-class="nav__link--active" to="/meditations">
           <IconPlayMini class="nav__icon" />
           <span class="nav__text">Медитация</span>
         </RouterLink>
@@ -17,7 +17,7 @@
       </li>
 
       <li class="nav__item">
-        <RouterLink class="nav__link" active-class="nav__link--active" to="/">
+        <RouterLink class="nav__link" active-class="nav__link--active" to="" @click="logout">
           <IconExit class="nav__icon" />
           <span class="nav__text">Выход</span>
         </RouterLink>
@@ -31,6 +31,15 @@ import IconLogo from '@/components/icon/IconLogo.vue';
 import IconStat from '@/components/icon/IconStat.vue';
 import IconExit from '@/components/icon/IconExit.vue'
 import IconPlayMini from './icon/IconPlayMini.vue';
+import { useLoginStore } from '@/stores/login.store';
+import { router } from '@/routes';
+
+const loginStore = useLoginStore()
+
+function logout() {
+  loginStore.clearToken()
+  router.push({ name: 'auth' });
+}
 
 </script>
 
@@ -39,8 +48,7 @@ import IconPlayMini from './icon/IconPlayMini.vue';
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 50px;
-  padding-top: 50px;
+  padding: 50px;
 }
 
 .nav__logo {

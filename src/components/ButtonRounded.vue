@@ -1,21 +1,23 @@
 <template>
-  <button class="btn">
+  <button class="btn-rounded">
     <slot></slot>
   </button>
 </template>
 
+<script setup lang="ts">
+
+</script>
+
 <style scoped>
-.btn {
+.btn-rounded {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  width: 64px;
-  height: 64px;
-  border-radius: 20px;
+  align-items: center;
   background-color: var(--color-fg);
-  color: var(--color-bg);
+  width: 75px;
+  height: 75px;
   border: none;
+  border-radius: 50%;
   cursor: pointer;
 }
 </style>

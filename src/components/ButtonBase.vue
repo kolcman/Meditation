@@ -2,7 +2,7 @@
   <button class="button">
     <slot />
     <div>
-      <slot name='icon'/>
+      <slot name='icon' />
     </div>
   </button>
 </template>
@@ -11,9 +11,10 @@
 .button {
   background: var(--color-bg);
   color: var(--color-fg);
-  font-family: var(--font),serif;
+  font-family: var(--font), serif;
   font-weight: 500;
   font-size: 15px;
   line-height: 18px;
+  cursor: pointer;
 }
 </style>

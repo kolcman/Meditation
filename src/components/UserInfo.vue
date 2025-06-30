@@ -1,29 +1,29 @@
 <template>
   <div class="user-info">
     <img class="user-avatar" src="../../public/avatar.png" alt="Автар">
-    <span class="user-welcome">Добро пожаловать, {{ userName }}!</span>
+    <span class="user-welcome">Добро пожаловать, {{ profileStore.profile?.data.user.username }}!</span>
     <span class="user-question">Как вы сегодня себя чувствуете?</span>
     <ul class="user-state">
       <li class="list-item">
-        <ButtonMood>
+        <ButtonMood @click="saveState('calm')">
           <IconYinYang />
         </ButtonMood>
         Спокойно
       </li>
       <li class="list-item">
-        <ButtonMood>
+        <ButtonMood @click="saveState('relax')">
           <IconRelax />
         </ButtonMood>
         Расслабленно
       </li>
       <li class="list-item">
-        <ButtonMood>
+        <ButtonMood @click="saveState('focus')">
           <IconFocus />
         </ButtonMood>
         Фокусировано
       </li>
       <li class="list-item">
-        <ButtonMood>
+        <ButtonMood @click="saveState('anxiety')">
           <IconAnxios />
         </ButtonMood>
         Тревожно
@@ -39,7 +39,51 @@ import IconYinYang from './icon/IconYinYang.vue';
 import IconRelax from './icon/IconRelax.vue';
 import IconFocus from './icon/IconFocus.vue';
 import IconAnxios from './icon/IconAnxios.vue';
-const userName = "Наталья"
+import { useProfileStore } from '@/stores/profile.store';
+import { onMounted } from 'vue';
+import { useStatsStore } from '@/stores/stats.store';
+
+const profileStore = useProfileStore()
+const statsStore = useStatsStore()
+
+onMounted(() => {
+  profileStore.getUserProfile()
+})
+
+
+function saveState(action: 'calm' | 'relax' | 'focus' | 'anxiety') {
+  switch (action) {
+    case 'calm':
+      statsStore.saveState({
+        type: 'feeling_calm',
+        value: 1,
+      })
+      console.log('1');
+      break;
+    case 'relax':
+      statsStore.saveState({
+        type: 'feeling_relax',
+        value: 1,
+      })
+      console.log('2');
+      break
+    case 'focus':
+      statsStore.saveState({
+        type: 'feeling_focus',
+        value: 1,
+      })
+      console.log('3');
+      break
+    case 'anxiety':
+      statsStore.saveState({
+        type: 'feeling_anxiety',
+        value: 1,
+      })
+      console.log('4');
+      break
+  }
+}
+
 </script>
 
 <style scoped>

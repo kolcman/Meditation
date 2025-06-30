@@ -4,7 +4,6 @@
       <MeditationCard :title="item.title" :description="item.description" :duration="item.duration_min" />
     </li>
   </ul>
-  <!-- {{ store.meditations }} -->
 </template>
 
 <script setup lang="ts">
@@ -20,7 +19,6 @@ onMounted(() => {
 
 
 
-
 </script>
 
 <style scoped>
@@ -29,7 +27,7 @@ onMounted(() => {
   padding: 0;
   list-style: none;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   flex-wrap: wrap;
   gap: 24px 22px;
 }

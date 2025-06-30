@@ -3,18 +3,19 @@
     <IconLogo class="start__logo" />
     <h1 class="start__title">Добро пожаловать!</h1>
     <p class="start__description">Медитируй и оставайся в фокусе, чтобы быть счастливым.</p>
-    <button class="start__btn" @click="redirectToMain">Войти в приложение</button>
+    <ButtonMain @click="redirectToMain">Войти в приложение</ButtonMain>
   </div>
 </template>
 
 <script setup lang="ts">
+import ButtonMain from '@/components/ButtonMain.vue';
 import IconLogo from '@/components/icon/IconLogo.vue'
 import { useRouter } from 'vue-router';
 
 const router = useRouter()
 
 function redirectToMain() {
-  router.push('/main')
+  router.push('/login')
 }
 
 </script>
@@ -29,6 +30,9 @@ function redirectToMain() {
   font-family: var(--font);
   text-align: center;
   color: var(--color-fg);
+  background-image: url('/public/bg.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .start__logo {
@@ -45,17 +49,5 @@ function redirectToMain() {
   font-weight: 500;
   font-size: 20px;
   margin-bottom: 65px;
-}
-
-.start__btn {
-  width: fit-content;
-  font-size: 25px;
-  font-weight: 500;
-  background-color: var(--color-btn);
-  color: var(--color-fg);
-  padding: 15px 55px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
 }
 </style>
