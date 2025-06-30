@@ -9,7 +9,7 @@
         Начать
         <IconPlay />
       </ButtonBase>
-      <span class="card__duration">{{ duration }} min</span>
+      <span class="card__duration">{{ duration_min }} min</span>
     </div>
   </div>
 </template>
@@ -17,21 +17,28 @@
 <script setup lang="ts">
 import ButtonBase from '@/components/ButtonBase.vue';
 import IconPlay from '@/components/icon/IconPlay.vue';
+import { router } from '@/routes';
 import { useMeditationsStore } from '@/stores/meditation.store';
+
+const { id, title, description, duration_min } = defineProps<{
+  id: number;
+  title: string;
+  description: string;
+  duration_min: number;
+}>()
 
 const meditationStore = useMeditationsStore();
 
 function startMeditation() {
-  meditationStore.isStarted = true;
+  meditationStore.startMeditation({
+    ID: id,
+    title: title,
+    description: description,
+    duration_min: duration_min
+  });
+  meditationStore.isStarted = true
+  router.push({ name: 'timer' });
 }
-
-const { title, description, duration } = defineProps({
-  title: String,
-  description: String,
-  duration: Number
-})
-
-
 </script>
 
 <style scoped>

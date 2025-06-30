@@ -17,5 +17,12 @@
   color: var(--color-bg);
   border: none;
   cursor: pointer;
+  scale: 1;
+  transition: var(--animation);
+}
+
+.btn:hover {
+  background-color: var(--color-btn-mood-hover);
+  scale: 1.1;
 }
 </style>

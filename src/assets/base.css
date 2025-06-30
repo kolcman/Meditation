@@ -11,7 +11,24 @@
   --color-bg-hover: #3c5153;
   --color-btn: #a2cdc1;
   --color-btn-hover: #7c9a92;
+  --color-btn-mood-hover: #69b09c;
   --icon-bg: #69b09c;
+
+  /* Цвета карточек статистики */
+  --card-stat-minuts: #69b09c;
+  --card-stat-mimuts-bg: #2b5b54;
+  --card-stat-calm: #69b069;
+  --card-stat-calm-bg: #2b5b33;
+  --card-stat-relax: #69a1b0;
+  --card-stat-relax-bg: #2b505b;
+  --card-stat-focus: #9cb069;
+  --card-stat-focus-bg: #595b2b;
+  --card-stat-anxiety: #b0696a;
+  --card-stat-anxiety-bg: #5b2b2c;
+
+  /* Анимация */
+
+  --animation: all 0.5s ease-in;
 }
 
 *,

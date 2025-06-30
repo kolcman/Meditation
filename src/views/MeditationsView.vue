@@ -1,17 +1,13 @@
 <template>
   <NavigationMenu />
   <div class="container">
-    <div v-if="!meditationStore.isStarted" class="controls">
-      <UserInfo />
-      <MeditationList />
-    </div>
-    <MeditationControl v-else class="meditation__control" />
+    <UserInfo />
+    <MeditationList @start="handleStartMeditation" />
   </div>
 </template>
 
 <script setup lang="ts">
 
-import MeditationControl from '@/components/MeditationControl.vue';
 import MeditationList from '@/components/MeditationList.vue';
 import NavigationMenu from '@/components/NavigationMenu.vue';
 import UserInfo from '@/components/UserInfo.vue';
@@ -19,16 +15,20 @@ import { useMeditationsStore } from '@/stores/meditation.store';
 
 const meditationStore = useMeditationsStore();
 
-// Сделал клик по кнопке с помощью стор.
+function handleStartMeditation(meditation: {
+  ID: number;
+  title: string;
+  description: string;
+  duration_min: number;
+}) {
+  meditationStore.startMeditation(meditation);
+}
 
 </script>
 
 <style scoped>
 .container {
   padding: 0 50px;
-}
-
-.controls {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
